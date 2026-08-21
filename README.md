@@ -6,17 +6,17 @@
 [![Dart](https://img.shields.io/badge/Dart-3.0+-green.svg)](https://dart.dev)
 [![Firebase](https://img.shields.io/badge/Firebase-Latest-orange.svg)](https://firebase.google.com)
 [![License](https://img.shields.io/badge/License-MIT-brightgreen.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Phase%201-yellow.svg)](#development-phases)
+[![Status](https://img.shields.io/badge/Status-Phase%202-yellow.svg)](#development-phases)
 
 ---
 
 ## 📱 Overview
 
-WalletIQ is a **production-ready**, **offline-first** personal finance management application for Android, built with Flutter and Firebase. It combines intuitive design, intelligent insights, and robust data management to help users take control of their finances.
-
-**Target Users:** Individuals in Sri Lanka, India, and beyond who need smart, accessible financial management.
+WalletIQ is a **production-ready**, **offline-first** personal finance management application for Android, built with Flutter and Firebase. It combines intuitive design, intelligent insights, and comprehensive financial tools to help users manage their money smartly.
 
 **Core Philosophy:** Real data. Real calculations. No fake features.
+
+**Target Users:** Individuals in Sri Lanka, India, and beyond who need smart, accessible financial management.
 
 ---
 
@@ -143,9 +143,16 @@ firebase login
 firebase init
 
 # Copy your google-services.json to android/app/
+# Copy your GoogleService-Info.plist to ios/Runner/ (if building for iOS)
 ```
 
-#### 4. Run Application
+#### 4. Generate Code
+```bash
+# Generate necessary code files
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+
+#### 5. Run Application
 ```bash
 # Run on connected device
 flutter run
@@ -170,358 +177,352 @@ flutter run -d <device_id>
 
 📄 **Documentation:** [PROJECT_AUDIT.md](PROJECT_AUDIT.md)
 
-### Phase 1: Foundation 🔄 IN PROGRESS
-- [ ] Flutter project setup
-- [ ] Material 3 theme
-- [ ] Light/Dark/AMOLED modes
-- [ ] Localization (EN, SI, TA)
-- [ ] Routing
-- [ ] Dependency injection
-- [ ] Local database (Hive)
-- [ ] Shared UI components
+---
 
-📄 **Documentation:** [PHASE_1_FOUNDATION_GUIDE.md](PHASE_1_FOUNDATION_GUIDE.md)
+### Phase 1: Foundation ✅ COMPLETED
+- [x] Flutter project setup
+- [x] Material 3 theme (Light/Dark/AMOLED/System)
+- [x] Localization (EN, SI, TA)
+- [x] Routing architecture
+- [x] Dependency injection
+- [x] Local database (Hive)
+- [x] Shared UI components
+- [x] Core utilities and services
+- [x] Data models
+- [x] State management providers
+
+📄 **Documentation:** [PHASE_1_COMPLETION.md](PHASE_1_COMPLETION.md)
+
+**Status:** ✅ 100% Complete | **Date:** August 21, 2026
+
+---
+
+### Phase 2: Authentication 🔄 IN PROGRESS
+- [ ] Firebase Authentication setup
+- [ ] Email/Password login
+- [ ] Email/Password signup
+- [ ] Email verification flow
+- [ ] Google OAuth authentication
+- [ ] Phone authentication
+- [ ] Forgot password flow
+- [ ] User profile setup & editing
+- [ ] Session management & auto-login
+- [ ] Logout functionality
+- [ ] Delete account flow
+
+📄 **Documentation:** [PHASE_2_AUTHENTICATION_GUIDE.md](PHASE_2_AUTHENTICATION_GUIDE.md)
 
 **Expected Duration:** 1-2 weeks
 
-### Phase 2: Authentication 📅 PLANNED
-- Firebase Auth integration
-- Email/password login & signup
-- Google OAuth
-- Phone authentication
-- Email verification
-- Forgot password flow
-- User profile setup
-- Session management
+---
 
 ### Phase 3: Core Finance 📅 PLANNED
 - Dashboard with real data
 - Transaction engine (add/edit/delete)
 - Wallet management
-- Category system
-- Balance calculations
-- Transaction search & filters
-- Real-time data synchronization
+- Category management
+- Bulk transaction upload
+- Transaction export
 
 ### Phase 4: Finance Management 📅 PLANNED
-- Loans (lent/borrowed)
-- Loan payments & tracking
-- Goals management
-- Budgets
-- Bills & reminders
+- Budgets system
+- Loan manager
+- Financial goals
+- Bills manager
 - Recurring transactions
 
 ### Phase 5: Analytics 📅 PLANNED
-- Charts & visualizations
+- Charts and visualizations
 - Financial health score
-- Spending analysis
-- Income trends
-- Budget performance
-- Cash flow
+- Cash flow forecasting
+- Spending insights
+- PDF report generation
 
-### Phase 6: Offline & Sync 📅 PLANNED
-- Offline-first architecture
-- Local database sync
+### Phase 6: Reports & Backup 📅 PLANNED
+- PDF reports
+- JSON export/import
+- CSV export
+- Backup & restore
+- Data sharing
+
+### Phase 7: Offline & Sync 📅 PLANNED
+- Local-first architecture
+- Sync engine
 - Conflict resolution
-- Backup/restore
-- Data export (JSON/CSV)
+- Offline indicator
+- Attachment sync
 
-### Phase 7: Advanced Features 📅 PLANNED
+### Phase 8: Security 📅 PLANNED
+- PIN lock
+- Biometric authentication
+- Auto-lock timer
+- Hide balances
+- Secure storage
+
+### Phase 9: Smart Features 📅 PLANNED
 - Voice input
 - Receipt OCR
 - QR payment recording
-- PDF report generation
-- Android widgets
-- Android shortcuts
-- Notifications
+- AI insights
+- Rule-based insights
 
-### Phase 8: Security & Polish 📅 PLANNED
-- PIN/Biometric lock
-- Data encryption
-- Firestore security rules
-- Storage security rules
-- Accessibility compliance
-- Performance optimization
-- Testing & QA
+### Phase 10: Android Features 📅 PLANNED
+- Home screen widgets
+- Android shortcuts
+- Deep linking
+- Share functionality
+- Background sync
+
+### Phase 11: Quality Assurance 📅 PLANNED
+- Unit tests
+- Widget tests
+- Integration tests
+- Performance testing
+- Security testing
+
+### Phase 12: Release Preparation 📅 PLANNED
+- App icon & branding
+- Splash screen
+- Play Store preparation
+- Versioning
+- Analytics setup
 
 ---
 
-## 🔐 Security & Privacy
+## 📊 Project Progress
+
+```
+████████████████████░░░░░░░░░░░░░░░░░░░░░░  25% Complete
+
+Phase 0: Audit ✅ DONE
+Phase 1: Foundation ✅ DONE
+Phase 2: Authentication 🔄 IN PROGRESS
+Phases 3-12: Planned 📅
+```
+
+---
+
+## 🛠️ Build & Run
+
+### Development
+```bash
+# Development build
+flutter run
+
+# With verbose logging
+flutter run -v
+
+# Debug on specific device
+flutter run -d <device_id>
+```
+
+### Testing
+```bash
+# Run all tests
+flutter test
+
+# Run specific test file
+flutter test test/features/auth/login_test.dart
+
+# With coverage
+flutter test --coverage
+```
+
+### Building
+```bash
+# Debug APK
+flutter build apk --debug
+
+# Release APK
+flutter build apk --release
+
+# App Bundle (for Play Store)
+flutter build appbundle --release
+
+# Split APKs by ABI
+flutter build apk --split-per-abi --release
+```
+
+---
+
+## 📁 Project Structure
+
+```
+walletiq/
+├── android/                        # Android native code
+│   ├── app/
+│   │   ├── build.gradle           # Build configuration
+│   │   └── src/main/AndroidManifest.xml
+│   └── build.gradle
+├── ios/                            # iOS native code
+├── lib/
+│   ├── main.dart                  # Entry point
+│   ├── config/
+│   │   ├── theme/                 # Material 3 theme
+│   │   ├── localization/          # Translations
+│   │   ├── routes/                # App router
+│   │   └── service_locator.dart   # Dependency injection
+│   ├── core/
+│   │   ├── constants/             # App constants
+│   │   ├── errors/                # Exception & Failure classes
+│   │   ├── utils/                 # Formatters & Validators
+│   │   └── services/              # Core services
+│   ├── features/
+│   │   ├── auth/                  # Authentication feature
+│   │   ├── dashboard/             # Dashboard feature
+│   │   ├── transactions/          # Transactions feature
+│   │   ├── wallets/               # Wallets feature
+│   │   ├── loans/                 # Loans feature
+│   │   ├── goals/                 # Goals feature
+│   │   ├── analytics/             # Analytics feature
+│   │   └── profile/               # Profile feature
+│   └── shared/
+│       ├── models/                # Reusable data models
+│       ├── providers/             # State management
+│       └── widgets/               # Reusable UI components
+├── test/                           # Tests
+├── pubspec.yaml                   # Dependencies
+└── README.md
+```
+
+---
+
+## 🔐 Security Features
+
+### Authentication
+- Firebase Authentication (Email, Google, Phone)
+- Email verification required
+- Password reset flow
+- Automatic session timeout (24 hours)
+- Refresh token management
 
 ### Data Protection
-- ✅ User data isolated by UID
-- ✅ Firestore security rules enforced
-- ✅ Firebase Storage access controlled
-- ✅ No hardcoded secrets
-- ✅ Secure local storage
+- User data isolated by UID
+- Firestore security rules enforced
+- Encrypted local storage (flutter_secure_storage)
+- PIN/Biometric lock option
+- Auto-lock on app background
 
-### Firestore Rules
-📄 View: [firestore.rules](firestore.rules)
-
-```
-✅ Users can only access their own data
-✅ Transaction data isolated
-✅ Loan data isolated
-✅ Attachment access restricted
-✅ Validation on write
-```
-
-### Storage Rules
-📄 View: [storage.rules](storage.rules)
-
-```
-✅ Avatars: User-specific access
-✅ Receipts: User-specific access
-✅ Backups: User-specific access
-✅ Reports: User-specific access
-✅ File size limits enforced
-✅ Content type validation
-```
+### Privacy
+- Privacy Policy screen
+- Terms of Service screen
+- Data export functionality
+- Account deletion with data wipe
+- GDPR compliance ready
 
 ---
 
-## 🌍 Localization
+## 📱 Supported Platforms
 
-### Supported Languages
-- **English** (en) - English
-- **Sinhala** (si) - සිංහල
-- **Tamil** (ta) - தமிழ්
+- **Android** 5.0 (API 21) and above
+- **Minimum:** API 21 (Android 5.0)
+- **Target:** API 34 (Android 14)
 
-### Adding New Language
-1. Add language code to `pubspec.yaml`
-2. Create translation map in `lib/config/localization/translations.dart`
-3. Update `easy_localization` configuration
-4. Rebuild
-
----
-
-## 🎨 Theme System
-
-### Available Themes
-1. **Light Mode** - Clean, bright interface
-2. **Dark Mode** - Easy on the eyes
-3. **AMOLED Mode** - True black for AMOLED screens
-4. **System Mode** - Follows device preference
-
-### Color Scheme
-- **Primary:** Blue (#2563EB)
-- **Success:** Green (#10B981)
-- **Error:** Red (#EF4444)
-- **Accent:** Various per context
-
----
-
-## 📱 Android Integration
-
-### Features
-- ✅ Push Notifications (FCM)
-- ✅ Local Notifications
-- ✅ Biometric Authentication
-- ✅ Home Screen Widgets
-- ✅ Quick Actions
-- ✅ Deep Linking
-- ✅ Share Functionality
-
-### Permissions
-```xml
-<!-- AndroidManifest.xml -->
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-<uses-permission android:name="android.permission.CAMERA" />
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-```
+iOS support planned for future phases.
 
 ---
 
 ## 🧪 Testing
 
-### Test Coverage
-- ✅ Unit tests for business logic
-- ✅ Widget tests for UI components
-- ✅ Integration tests for flows
-- ✅ Firebase integration tests
-
-### Running Tests
+### Unit Tests
 ```bash
-# Unit tests
 flutter test
+```
 
-# Integration tests
-flutter test integration_test/
+### Widget Tests
+```bash
+flutter test --tags="widget"
+```
 
-# Generate coverage
+### Integration Tests
+```bash
+flutter drive --target=test_driver/app.dart
+```
+
+### Code Coverage
+```bash
 flutter test --coverage
 lcov --list coverage/lcov.info
 ```
 
 ---
 
-## 🔍 Financial Calculation Rules
+## 📚 Documentation
 
-### Balance Calculation
-```
-Total Balance = Total Income - Total Expense
-```
-
-### Wallet Balance
-```
-Wallet Balance = Initial Balance + Income - Expense
-```
-
-### Loan Remaining
-```
-Remaining = Total Amount - Paid Amount
-Progress = (Paid Amount / Total Amount) × 100%
-```
-
-### Goal Progress
-```
-Progress = (Current Balance / Target Amount) × 100%
-Clamped: 0% - 100%
-```
-
-### Budget Alert
-```
-Used = Sum of expenses in category
-Remaining = Budget - Used
-Over Budget = Used > Budget
-```
-
----
-
-## 🔄 Offline-First Sync
-
-### Sync Flow
-1. **Local Write:** Transaction saved to Hive
-2. **Offline State:** App continues normally
-3. **Internet Return:** Changes queued for sync
-4. **Cloud Sync:** Data sent to Firestore
-5. **Conflict Resolution:** Last-write-wins or merge
-6. **Confirmation:** User notified of sync status
-
-### Conflict Handling
-- Timestamp-based resolution
-- User notification on conflicts
-- Manual conflict resolution UI
-- Backup of conflicted data
-
----
-
-## 🚨 Known Limitations & TODOs
-
-### Phase 1 (Current)
-- [ ] Firebase not yet integrated
-- [ ] Notifications not yet implemented
-- [ ] Hive database in setup phase
-- [ ] No authentication flow yet
-
-### Future Phases
-- Multi-currency full support (Phase 5)
-- Investment portfolio tracking (Phase 9)
-- Shared wallet management (Phase 10)
-- Bill payment integration (Phase 11)
-
----
-
-## 📊 Project Statistics
-
-| Metric | Value |
-|--------|-------|
-| **Languages** | Dart, Kotlin, Swift |
-| **Platform** | Android 21+ |
-| **Target Users** | 1M+ |
-| **Phases** | 12 total |
-| **Estimated Timeline** | 6-9 months |
-| **Target Launch** | Q4 2026 |
+- **[PROJECT_AUDIT.md](PROJECT_AUDIT.md)** - Complete audit of existing features
+- **[PHASE_1_COMPLETION.md](PHASE_1_COMPLETION.md)** - Phase 1 completion summary
+- **[PHASE_2_AUTHENTICATION_GUIDE.md](PHASE_2_AUTHENTICATION_GUIDE.md)** - Phase 2 guide
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
+- **[CHANGELOG.md](CHANGELOG.md)** - Version history
 
 ---
 
 ## 🤝 Contributing
 
-### Development Workflow
-1. Create feature branch: `git checkout -b feature/your-feature`
-2. Make changes following code style
-3. Commit with clear messages: `git commit -m "feat: add feature"`
-4. Push to branch: `git push origin feature/your-feature`
-5. Create Pull Request with description
+We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, development process, and how to submit pull requests.
 
-### Code Style
-- Follow [Effective Dart](https://dart.dev/guides/language/effective-dart)
-- Use linter rules from `analysis_options.yaml`
-- Format code: `dart format .`
-- Analyze: `dart analyze`
+### Quick Start for Contributors
+```bash
+# 1. Fork the repository
+# 2. Clone your fork
+git clone https://github.com/YOUR_USERNAME/WalletIQ.git
 
----
+# 3. Create a feature branch
+git checkout -b feature/your-feature-name
 
-## 📞 Support
+# 4. Make changes and test
+flutter test
 
-### Getting Help
-- 📖 Check [PROJECT_AUDIT.md](PROJECT_AUDIT.md) for architecture
-- 📋 Read [PHASE_1_FOUNDATION_GUIDE.md](PHASE_1_FOUNDATION_GUIDE.md) for setup
-- 🔒 Review [firestore.rules](firestore.rules) for security
-- 💾 Check [storage.rules](storage.rules) for storage access
+# 5. Format code
+dart format .
 
-### Reporting Issues
-1. Check existing issues
-2. Include reproduction steps
-3. Provide device/OS info
-4. Attach logs if relevant
+# 6. Analyze code
+dart analyze
+
+# 7. Commit with conventional messages
+git commit -m "feat: add your feature"
+
+# 8. Push and create pull request
+git push origin feature/your-feature-name
+```
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 📞 Contact
+## 👥 Team
 
-**Project Lead:** Harsh Ajith Lakshan  
-**Email:** harshajithlakshan152@gmail.com  
-**GitHub:** [@harshajith-lakshan](https://github.com/harshajith-lakshan)  
-**Repository:** [WalletIQ](https://github.com/harshajith-lakshan/WalletIQ)
+- **Lead Developer:** [@harshajith-lakshan](https://github.com/harshajith-lakshan)
 
 ---
 
-## 🎯 Roadmap
+## 🙏 Acknowledgments
 
-### Q3 2026
-- ✅ Phase 0: Audit
-- 🔄 Phase 1: Foundation
-- 📅 Phase 2: Authentication
-
-### Q4 2026
-- 📅 Phase 3: Core Finance
-- 📅 Phase 4: Management
-- 📅 Phase 5: Analytics
-
-### Q1 2027
-- 📅 Phase 6: Offline & Sync
-- 📅 Phase 7: Advanced Features
-- 📅 Phase 8: Security & Polish
-
-### Q2 2027
-- 📅 Beta Testing
-- 📅 Play Store Submission
-- 📅 Official Launch
+- Flutter and Dart communities
+- Firebase for backend services
+- Material Design 3
+- All open-source contributors
 
 ---
 
-## ✅ Project Status
+## 📞 Support
 
-```
-████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  20% Complete
+- **Issues:** [GitHub Issues](https://github.com/harshajith-lakshan/WalletIQ/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/harshajith-lakshan/WalletIQ/discussions)
+- **Email:** [Create an issue for support](https://github.com/harshajith-lakshan/WalletIQ/issues/new)
 
-Phase 0: Audit ✅ DONE
-Phase 1: Foundation 🔄 IN PROGRESS
-Phase 2+: Planned 📅
-```
+---
+
+## 🗺️ Roadmap
+
+See [CHANGELOG.md](CHANGELOG.md) for detailed roadmap and upcoming features.
+
+---
 
 **Last Updated:** August 21, 2026  
-**Next Update:** August 28, 2026
-
----
-
-**Made with ❤️ for better financial management**
+**Current Phase:** 2 - Authentication (In Progress)  
+**Overall Progress:** 25% (Phases 1-2 of 12)
