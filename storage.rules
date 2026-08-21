@@ -1,0 +1,112 @@
+// WalletIQ Firebase Storage Security Rules
+// Version: 1.0
+// Status: PRODUCTION-READY
+// Last Updated: August 21, 2026
+
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function isValidImage() {
+      return request.resource.contentType.matches('image/.*');
+    }
+    
+    function isValidSize() {
+      // Max 5MB for images
+      return request.resource.size <= 5 * 1024 * 1024;
+    }
+    
+    function extractUserId(path) {
+      return path.split('/')[0];
+    }
+    
+    // ========================================
+    // USER AVATARS
+    // ========================================
+    match /avatars/{userId}/{allFiles=**} {
+      // User can read their own avatar
+      allow read: if isAuthenticated() && isOwner(userId);
+      
+      // User can upload their own avatar
+      allow write: if isAuthenticated() && isOwner(userId) &&
+        isValidImage() &&
+        isValidSize() &&
+        request.resource.contentType in ['image/jpeg', 'image/png', 'image/webp'];
+      
+      // User can delete their own avatar
+      allow delete: if isAuthenticated() && isOwner(userId);
+    }
+    
+    // ========================================
+    // TRANSACTION ATTACHMENTS (RECEIPTS)
+    // ========================================
+    match /receipts/{userId}/{transactionId}/{allFiles=**} {
+      // User can read their own receipts
+      allow read: if isAuthenticated() && isOwner(userId);
+      
+      // User can upload receipts
+      allow write: if isAuthenticated() && isOwner(userId) &&
+        isValidImage() &&
+        isValidSize() &&
+        request.resource.contentType in ['image/jpeg', 'image/png', 'image/webp'];
+      
+      // User can delete their own receipts
+      allow delete: if isAuthenticated() && isOwner(userId);
+    }
+    
+    // ========================================
+    // BACKUP EXPORTS (JSON/CSV)
+    // ========================================
+    match /backups/{userId}/{backupId}/{allFiles=**} {
+      // User can read their own backups
+      allow read: if isAuthenticated() && isOwner(userId);
+      
+      // User can upload backups
+      allow write: if isAuthenticated() && isOwner(userId) &&
+        request.resource.contentType in [
+          'application/json',
+          'text/csv',
+          'text/plain'
+        ] &&
+        request.resource.size <= 50 * 1024 * 1024; // 50MB for backups
+      
+      // User can delete their own backups
+      allow delete: if isAuthenticated() && isOwner(userId);
+    }
+    
+    // ========================================
+    // REPORT EXPORTS (PDF)
+    // ========================================
+    match /reports/{userId}/{reportId}/{allFiles=**} {
+      // User can read their own reports
+      allow read: if isAuthenticated() && isOwner(userId);
+      
+      // User can upload reports
+      allow write: if isAuthenticated() && isOwner(userId) &&
+        request.resource.contentType in [
+          'application/pdf',
+          'image/png'
+        ] &&
+        request.resource.size <= 20 * 1024 * 1024; // 20MB for reports
+      
+      // User can delete their own reports
+      allow delete: if isAuthenticated() && isOwner(userId);
+    }
+    
+    // ========================================
+    // DENY ALL OTHER PATHS BY DEFAULT
+    // ========================================
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
